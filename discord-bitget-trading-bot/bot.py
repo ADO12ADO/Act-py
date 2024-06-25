@@ -10,7 +10,10 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
 
-bot = commands.Bot(command_prefix='!')
+intents = discord.Intents.default()
+intents.message_content = True  # Mengaktifkan intent untuk konten pesan
+
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
