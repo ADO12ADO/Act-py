@@ -34,4 +34,5 @@ async def on_message(message):
         await message.channel.send(f"Order placed for {order_details['token']}")
 
 if __name__ == "__main__":
+    print("Token from .env:", TOKEN)  # Memastikan token terbaca dengan benar
     bot.run(TOKEN)
