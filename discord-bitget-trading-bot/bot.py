@@ -1,6 +1,5 @@
 import discord
 import os
-from discord.ext import commands
 from dotenv import load_dotenv
 from parser import parse_message
 from bitget import place_order
@@ -11,9 +10,9 @@ TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
 
 intents = discord.Intents.default()
-intents.message_content = True  # Mengaktifkan intent untuk konten pesan
+intents.message_content = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = discord.Client(intents=intents)
 
 @bot.event
 async def on_ready():
@@ -29,10 +28,10 @@ async def on_message(message):
             order_details['entry_price'],
             order_details['invalidation_level'],
             order_details['target_prices'],
-            balance=10000  # Example balance
+            balance=10000
         )
         await message.channel.send(f"Order placed for {order_details['token']}")
 
 if __name__ == "__main__":
-    print("Token from .env:", TOKEN)  # Memastikan token terbaca dengan benar
+    print("Token from .env:", TOKEN)
     bot.run(TOKEN)
